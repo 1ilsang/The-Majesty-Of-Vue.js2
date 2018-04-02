@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>1ilsang.blog.me</title>
+</head>
+<body>
+<div class="container">
+    <button v-on:click="upvotes++">
+        <!-- 클릭하면 upvotes가 ++ 된다. -->
+        Upvote! ({{upvotes}})
+    </button>
+    <button v-on:click="upvoteM">
+        <!-- 메서드로 바인딩 -->
+        Method! {{upvotesM}}
+    </button>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+
+<script type="text/javascript">
+new Vue({
+    el: '.container',
+    data: {
+        upvotes: 0,
+        upvotesM : 0,
+    },
+    methods:{
+        upvoteM:function () {
+            //여기서의 this는 Vue인스턴스를 가리킴
+            this.upvotesM++;
+        }
+    }
+})
+</script>
+
+</html>
