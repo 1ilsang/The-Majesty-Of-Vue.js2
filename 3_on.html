@@ -9,33 +9,93 @@
 </head>
 <body>
 <div class="container">
-    <button v-on:click="upvotes++">
-        <!-- 클릭하면 upvotes가 ++ 된다. -->
-        Upvote! ({{upvotes}})
-    </button>
-    <button v-on:click="upvoteM">
-        <!-- 메서드로 바인딩 -->
-        Method! {{upvotesM}}
-    </button>
+    <!--<button v-on:click="upvotes++">-->
+        <!--&lt;!&ndash; 클릭하면 upvotes가 ++ 된다. &ndash;&gt;-->
+        <!--Upvote! ({{upvotes}})-->
+    <!--</button>-->
+    <!--<button @:click="upvoteM">-->
+        <!--&lt;!&ndash; 메서드로 바인딩, @로 v-on을 축약할 수 있음 &ndash;&gt;-->
+        <!--Method! {{upvotesM}}-->
+    <!--</button>-->
+    <!--//////////////////////////////////-->
+    <form class="form-inline">
+        <!--입력을 숫자로 파싱하기 위해 특수 수식어 number 를 사용. -->
+        <!-- model.number를 하면 숫자 이외의 값은 들어가지 않게 된다. -->
+        <!--<input v-model.number="a" class="form-control">-->
+        <!--
+            keyup.enter 를 통해 엔터 이벤를 줄 수 있음.
+            이 외에도 tab,delete,esc,space,상하좌우(up,down,...)
+        -->
+        <input v-model.number="a" @keyup.enter="calculate" class="form-control">
+        <select v-model="operator" class="form-control">
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select>
+        <input v-model.number="b" class="form-control">
+        <!--<button type="submit" @click="calculate" class="btn btn-primary">-->
+        <!-- e.prevent... 이나 click.prevent 를 안해주면 제출되서 페이지가 로드됨.
+            @submit.prevent 로 기본 제출 동작을 방지할 수 있다.
+        -->
+        <button type="submit" @click.prevent="calculate" class="btn btn-primary">
+            Calculate
+        </button>
+    </form>
+    <h2>Result: {{a}} {{operator}} {{b}} = {{c}}</h2>
+    <pre>
+        {{$data}}
+    </pre>
 </div>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
 
 <script type="text/javascript">
+// new Vue({
+//     el: '.container',
+//     data: {
+//         upvotes: 0,
+//         upvotesM : 0,
+//     },
+//     methods:{
+//         upvoteM:function () {
+//             //여기서의 this는 Vue 인스턴스를 가리킴
+//             this.upvotesM++;
+//         }
+//     }
+// })
 new Vue({
     el: '.container',
-    data: {
-        upvotes: 0,
-        upvotesM : 0,
+    data:{
+        a:1,
+        b:2,
+        c:null,
+        operator: "+"
     },
     methods:{
-        upvoteM:function () {
-            //여기서의 this는 Vue인스턴스를 가리킴
-            this.upvotesM++;
+        calculate: function (e) {
+            // e.preventDefault();
+            //이걸 안해주면 폼이 제출되므로 페이지가 다시 로드된다
+            //따라서 C에 값이 제대로 안들어가게 되므로 막아주어야 한다.
+            //cliick.prevent 이벤트로 막을 수 있음.
+            switch (this.operator){
+                case "+":
+                    this.c = this.b+this.a
+                    break;
+                case "-":
+                    this.c = this.a - this.b
+                    break;
+                case "*":
+                    this.c = this.b*this.a
+                    break;
+                case "/":
+                    this.c = this.a + this.b
+                    break;
+            }
         }
     }
-})
+});
 </script>
 
 </html>
