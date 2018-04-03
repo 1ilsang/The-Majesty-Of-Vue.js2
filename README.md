@@ -12,3 +12,5 @@ Vue.js 기본적인 내용.
 1. model, if, show, el, data
 2. for..in (value, key, index), {{$}}
 3. on event, @, methods, prevent, model.number, calculator
+4. computed 계산된 결과
+5. for에서 filter 사용

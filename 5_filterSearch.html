@@ -32,7 +32,7 @@
                 </li>
             </ul>
             <!-- 계산된 결과를 반환 -->
-            <h3>Upvotes > 25. Computed filter</h3>
+            <h3>Upvotes > 25. Computed filter ({{famous.length}})</h3>
             <ul>
                 <li
                     v-for="story in famous"
@@ -40,6 +40,20 @@
                 >
                     {{story.writer}} said "{{story.plot}}"
                     and upvoted {{story.upvotes}} times.
+                </li>
+            </ul>
+            <!-- Search -->
+            <div class="form-group">
+                <label for="query">What are you looking for?</label>
+                <input v-model="query" class="form-control">
+            </div>
+            <h3>Search results:</h3>
+            <ul class="list-group">
+                <li
+                    v-for="story in search"
+                    class="list-group-item"
+                >
+                    {{story.writer}} said "{{story.plot}}"
                 </li>
             </ul>
         </div>
@@ -73,7 +87,8 @@ new Vue({
                 writer: "John",
                 upvotes: 74
             }
-        ]
+        ],
+        query:' '
     },
     methods:{
         storiesBy:function (writer) {
@@ -81,12 +96,20 @@ new Vue({
                 return story.writer === writer;
             });
         }
-    },
+    },//methods와 computed의 차이를 정확하게 알아두어야 할 듯.
     computed:{
         famous: function () {
             return this.stories.filter(function (value) {
                 return value.upvotes > 25;
             });
+        },
+        search: function () {
+            var query = this.query;
+            return this.stories.filter(function (value) {
+                //includes를 통해 query 값이 포함되는지 확인한다.
+                //plot의 기능은 아직 정확하게 모르겠음
+                return value.plot.includes(query);
+            })
         }
     }
 })
