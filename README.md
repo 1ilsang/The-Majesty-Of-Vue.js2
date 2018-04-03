@@ -12,14 +12,14 @@ Vue.js 기본적인 내용.
 
 1. 기본
     1. [Model, if, show, el, data](Basic/1_ifshowModel.html)
-    2. For..in (value, key, index), {{$}}
-    3. On event, @, methods, prevent, model.number, calculator
-    4. Computed 계산된 결과
-    5. For에서 filter 사용
-    6. Vue.filter
-    7. Lodash.filter
-    8. Component
-    9. 앞선 내용 정리.
+    2. [For..in (value, key, index), {{$}}](Basic/2_for.html)
+    3. [On event, @, methods, prevent, model.number, calculator](Basic/3_on.html)
+    4. [Computed 계산된 결과](Basic/4_computed.html)
+    5. [For에서 filter 사용](Basic/5_filterSearchSort.html)
+    6. [Vue.filter](Basic/6_vueFilter.html)
+    7. [Lodash.filter](Basic/7_lodashFilter.html)
+    8. [Component](Basic/8_Component.html)
+    9. [앞선 내용 정리.](Basic/9_ComponentWithVote.html)
     10. Event (on, emit)
 
 
