@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <h2>Real identities of Super Heroes!</h2>
+    <ul class="list-group">
+        <li
+            v-for="hero in heroes"
+            class="list-group-item"
+        >
+            {{ hero | snitch}}
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+Vue.filter('snitch', function (hero) {
+    return hero.secretId + ' is '
+        + hero.firstname + ' '
+        + hero.lastname + ' in real life!';
+})
+new Vue({
+    el: '.container',
+    data:{
+        heroes:[
+            {firstname: 'Bruce', lastname:' Wayne', secretId: 'Batman'},
+            {firstname: 'SangChul', lastname:' Lee', secretId: '1ilsang'},
+            {firstname: 'Clark', lastname:' Kent', secretId: 'Superman'},
+        ]
+    }
+})
+</script>
+</body>
+</html>
