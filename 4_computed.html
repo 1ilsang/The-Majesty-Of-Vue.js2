@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        a={{a}}, b={{b}}
+        <!--<input v-model="a">-->
+        <!--이렇게만 하면 a가 문자열로 인식되어 a1 이렇게 붙어서 나옴.-->
+        <!--<input type="number" v-model="a">-->
+        <input v-model.number="a">
+        <select v-model="operator" class="form-control">
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select>
+        <input v-model.number="b">
+        <h2>Result: {{a}} {{operator}} {{b}} = {{c}}</h2>
+        <pre>
+            {{$data}}
+        </pre>
+    </div>
+</body>
+<script type="text/javascript">
+new Vue({
+    el: '.container',
+    data:{
+        a:1,
+        b:2,
+        operator: "+"
+    },
+    computed:{
+        //계산된 getter
+        // b: function () {
+        //     //this 는 vue 인스턴스
+        //     //이렇게만 하면 a가 문자열로 인식되어 a1 이렇게 붙어서 나옴.
+        //     return this.a + 1;
+        // }
+        c: function () {
+            switch (this.operator){
+                case "+":
+                    return this.a + this.b;
+                    break;
+                case "-":
+                    return this.a - this.b
+                    break;
+                case "*":
+                    return this.a * this.b
+                    break;
+                case "/":
+                    //나누기 입력시 1/0 과 같은 오류를 알아서 잡아줌
+                    return this.a / this.b
+                    break;
+            }
+        }
+    }
+})
+</script>
+</html>

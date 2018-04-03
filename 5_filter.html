@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Let's hear some stories!</h1>
+        <div>
+            <h3>Alex's stories</h3>
+            <ul class="list-group">
+                <li
+                    v-for="story in storiesBy('Alex')"
+                    class="list-group-item"
+                >
+                    <!--for 문에서 함수로 돌리고 있다. -->
+                    {{story.writer}} said "{{story.plot}}"
+                </li>
+            </ul>
+            <h3>John's stories</h3>
+            <ul>
+                <li
+                        v-for="story in storiesBy('John')"
+                        class="list-group-item"
+                >
+                    {{story.writer}} said "{{story.plot}}"
+                </li>
+            </ul>
+            <!-- 계산된 결과를 반환 -->
+            <h3>Upvotes > 25. Computed filter</h3>
+            <ul>
+                <li
+                    v-for="story in famous"
+                    class="list-group-item"
+                >
+                    {{story.writer}} said "{{story.plot}}"
+                    and upvoted {{story.upvotes}} times.
+                </li>
+            </ul>
+        </div>
+        <pre>
+            {{$data}}
+        </pre>
+    </div>
+</body>
+<script type="text/javascript">
+new Vue({
+    el: '.container',
+    data:{
+        stories:[
+            {
+                plot: "I crashed my car today!",
+                writer: "Alex",
+                upvotes: 28
+            },
+            {
+                plot: "Yesterday, someone stole my bag!",
+                writer: "John",
+                upvotes: 8
+            },
+            {
+                plot: "I ate someone's chocolate!",
+                writer: "Alex",
+                upvotes: 51
+            },
+            {
+                plot: "Someone ate my chocolate...",
+                writer: "John",
+                upvotes: 74
+            }
+        ]
+    },
+    methods:{
+        storiesBy:function (writer) {
+            return this.stories.filter(function (story) {
+                return story.writer === writer;
+            });
+        }
+    },
+    computed:{
+        famous: function () {
+            return this.stories.filter(function (value) {
+                return value.upvotes > 25;
+            });
+        }
+    }
+})
+</script>
+</html>
