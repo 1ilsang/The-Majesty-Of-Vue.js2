@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+<div class="container">
+    <!--<story></story>-->
+    <!--<story></story>-->
+    <!--<story></story>-->
+
+    <!--<story plot="1ilsang.blog.me"></story>-->
+    <!--<story plot="My horse is amazing!"></story>-->
+    <!--<story plot="hahah"></story>-->
+
+    <!--<story plot="1ilsang.blog.me" writer="Jackson Lee"></story>-->
+    <story v-bind:story="{plot: 'bind object', writer: 'v\tue'}"></story>
+    <story :story="{plot: 'bind object2', writer: 'vu\re2'}"></story>
+</div>
+</body>
+
+<template id="story-template">
+    <!--<h1>1ilsang.blog.me</h1>-->
+    <!--<h1>{{plot}}</h1>-->
+    <h1>{{story.writer}} said "{{story.plot}}"</h1>
+</template>
+
+<script type="text/javascript">
+Vue.component('story', {
+    // template: '<h1>My horse is amazing!</h1>'
+    template: '#story-template',
+    // props: ['plot']
+    props: ['story']
+});
+new Vue({
+    el: '.container'
+});
+</script>
+</html>

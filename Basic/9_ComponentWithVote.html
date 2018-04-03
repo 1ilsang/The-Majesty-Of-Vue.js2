@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <h1>Let's hear some stories</h1>
+        <ul>
+            <story
+                    v-for="story in stories"
+                    :story="story"
+                    :favorite="favorite"
+            ></story>
+        </ul>
+        <pre>{{$data}}</pre>
+    </div>
+</div>
+
+<template id="story-template">
+    <li class="list-group-item">
+        {{story.writer}} said "{{story.plot}}"
+        Story upvotes {{story.upvotes}}
+        <button
+                v-show="!story.voted" @click="upvote"
+        >Upvote
+        </button>
+        <button
+            v-show="!isFavorite" @click="setFavorite"
+        >Favorite
+        </button>
+        <!-- 좋아요는 한 번만 가능해야 하는데 모든 요소에 가능하게 된다.
+            그 이유는 단방향 바인딩을 통해 부->자 는 되지만 자->부 가 안됐기 때문.
+            이러한 문제를 해결하기 위해 이벤트를 지정해 주어야 한다.
+            이벤트는 이후의 장에서 배운다.
+        -->
+        <span
+                v-show="isFavorite"
+        >    << My Favorite!</span>
+    </li>
+</template>
+
+</body>
+<script type="text/javascript">
+Vue.component('story', {
+    template: '#story-template',
+    props: ['story', 'favorite'],
+    methods: {
+        upvote: function () {
+            this.story.upvotes += 1;
+            this.story.voted = true;
+        },
+        setFavorite: function () {
+            this.favorite = this.story;
+        },
+    },
+    computed:{
+        isFavorite: function () {
+            return this.story === this.favorite;
+        }
+    }
+});
+
+new Vue({
+    el: '#app',
+    data: {
+        stories: [
+            {
+                plot: 'My horse is amazing',
+                writer: 'Mr. Weebl',
+                upvotes: 28,
+                voted: false
+            },
+            {
+                plot: 'Narwhals invented Shish Kebab',
+                writer: 'Mr. Weebl',
+                upvotes: 8,
+                voted: false
+            },
+            {
+                plot: 'The dark side of the Force is stronger.',
+                writer: 'Darth Varder',
+                upvotes: 49,
+                voted: false
+            },
+            {
+                plot: '1ilsang.blog.me',
+                writer: '1ilsang',
+                upvotes: 74,
+                voted: false
+            }
+        ],
+        favorite: {}
+    }
+});
+</script>
+</html>
