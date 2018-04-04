@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<div class="container text-center">
+    <h1>Food Battle</h1>
+    <p style="font-size: 140px;">
+        <!--{{votes}}-->
+        {{votes.count}}
+    </p>
+    <button class="btn btn-danger" @click="reset">Reset votes</button>
+    <hr>
+
+
+
+    <div class="row">
+        <!--<food @voted="countVote" name="Cheeseburger"></food>-->
+        <!--<food @voted="countVote" name="Double Bacon Burger"></food>-->
+        <!--<food @voted="countVote" name="rodeo burger"></food>-->
+        <food name="Cheeseburger"></food>
+        <food name="Double Bacon burger"></food>
+        <food name="Whooper"></food>
+    </div>
+    <hr>
+
+    <h1>Log:</h1>
+    <ul class="list-group">
+        <!--<li class="list-group-item" v-for="vote in log">-->
+        <li class="list-group-item" v-for="vote in votes.log">
+            {{vote}}
+        </li>
+    </ul>
+</div>
+</body>
+
+<template id="food">
+    <div class="text-center col-lg-4">
+        <p style="font-size: 40px;">
+            {{votes}}
+        </p>
+        <button class="btn btn-default" @click="vote">{{name}}</button>
+    </div>
+
+</template>
+
+<script type="text/javascript">
+var bus = new Vue();
+
+Vue.component('food', {
+    template: '#food',
+    props: ['name'],
+    data: function () {
+        //자식마다 votes 를 가지고 있다. (별개)
+        return {
+            votes: 0
+        };
+    },
+    methods: {
+        vote: function (event) {
+            // console.log(event);
+            var food = event.srcElement.textContent;
+            this.votes++;
+            // this.$emit('voted', food);
+            bus.$emit('voted', food)
+        },
+        reset: function () {
+            this.votes = 0;
+        }
+    },
+    created(){
+        bus.$on('reset', this.reset);
+    }
+});
+
+new Vue({
+    el: '.container',
+    data: {
+        //부모가 가지고 있는 votes 이다.
+        // votes: 0,
+        // log: []
+        votes:{
+            count: 0,
+            log: []
+        }
+    },
+    methods: {
+        countVote: function (food) {
+            // this.votes++;
+            this.votes.count++;
+            // this.log.push(food + ' received a vote.');
+            this.votes.log.push(food + ' received a vote.');
+        },
+        reset: function () {
+            this.votes = {
+                count: 0,
+                log: []
+            };
+            bus.$emit('reset');
+        }
+    },
+    created(){
+        bus.$on('voted', this.countVote)
+    }
+});
+</script>
+</html>

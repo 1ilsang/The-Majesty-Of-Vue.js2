@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<div class="container text-center">
+    <p style="font-size:140px;">
+        {{votes}}
+    </p>
+    <!--<button class="btn btn-primary" @click="vote">Vote</button>-->
+    <food @voted="countVote" name="Cheeseburger"></food>
+    <!-- 자식의 voted 이벤트가 발생할 때 countVote 메서드가 실행. -->
+</div>
+<template id="food">
+    <!-- HTML 태그라 body 안에 넣어주어야 한다. -->
+    <button class="btn btn-default" @click="vote">{{name}}</button>
+</template>
+</body>
+<script type="text/javascript">
+Vue.component('food', {
+    template: '#food',
+    props: ['name'],
+    methods: {
+        vote: function () {
+            this.$emit('voted');
+        }
+    }
+});
+
+new Vue({
+    el: '.container',
+    data: {
+        votes: 0
+    },
+    methods: {
+        // 단방향으로만 가능하다.
+        // vote: function (writer) {
+        //     this.$emit('voted');
+        // },
+        countVote: function () {
+            this.votes++;
+        }
+    },
+    created() {
+        //생명주기 훅 중에 created 에 등록.
+        // beforeCreate
+        // 인스턴스 초기화 후 데이터 감시 및 이벤트/감시자 설정 전
+        //
+        // created
+        // 인스턴스가 생성된 직후.
+        //
+        // beforeMount
+        // 마운트 시작 직전.
+        //
+        // mounted
+        // 이제 막 DOM에 마운트 된 직후.
+        //
+        // beforeUpdate
+        // 데이터 변경시, 가상 DOM이 다시 렌더링되고 패치되기 전
+        //
+        // updated
+        // 데이터 변경 후 가상 DOM이 다시 렌더링되고 된 후
+        //
+        // activated
+        // keep-alive 상태의 컴포넌트가 활성화 될 때
+        //
+        // deactivated
+        // keep-alive 상태의 컴포넌트가 비활성화 될 때
+        //
+        // beforeDestroy
+        // Vue 인스턴스가 파괴되기 직전
+        //
+        // destroyed
+        // Vue 인스턴스가 파괴된 후
+        // this.$on('voted', function (button) {
+        //     this.votes++;
+        // });
+        //즉 인스턴스가 생성된 후 이벤트를 달아 이벤트를 기다리게 함.
+        //부모자식 간의 통신에서는 this 를 사용할 수 없다.
+        //-> this 는 각각 다른 인스턴스에 바인딩 되기 때문.
+    }
+});
+
+</script>
+
+</html>
