@@ -20,7 +20,9 @@ Vue.js 기본적인 내용.
     7. [Lodash.filter](Basic/7_lodashFilter.html)
     8. [Component](Basic/8_Component.html)
     9. [앞선 내용 정리.](Basic/9_ComponentWithVote.html)
-    10. Event (on, emit, once, off)
+    10. [Event (on, emit 기본)](Basic/10_EventBasic.html)
+    11. [Event (off 와 응용)](Basic/11_EventHard.html)
+    12. [클래스와 스타일 바인딩](Basic/12_ClassStyleBinding.html)
 
 
 ![vueLogo](https://cdn-images-1.medium.com/max/2000/1*PHmNXbvOfg5AHiMWWuaRXg.jpeg)

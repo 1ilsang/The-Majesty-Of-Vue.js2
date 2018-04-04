@@ -16,8 +16,6 @@
     <button class="btn btn-danger" @click="reset">Reset votes</button>
     <hr>
 
-
-
     <div class="row">
         <!--<food @voted="countVote" name="Cheeseburger"></food>-->
         <!--<food @voted="countVote" name="Double Bacon Burger"></food>-->
@@ -50,11 +48,13 @@
 
 <script type="text/javascript">
 var bus = new Vue();
+//전역 이벤트 버스
 
 Vue.component('food', {
     template: '#food',
     props: ['name'],
-    data: function () {
+    data:
+        function () {
         //자식마다 votes 를 가지고 있다. (별개)
         return {
             votes: 0
@@ -91,8 +91,8 @@ new Vue({
     methods: {
         countVote: function (food) {
             // this.votes++;
-            this.votes.count++;
             // this.log.push(food + ' received a vote.');
+            this.votes.count++;
             this.votes.log.push(food + ' received a vote.');
         },
         reset: function () {
@@ -101,6 +101,10 @@ new Vue({
                 log: []
             };
             bus.$emit('reset');
+        },
+        stop: function () {
+            // off 는 이벤트를 제거. voted 라는 이벤트를 제거한다.
+            bus.$off(['voted']);
         }
     },
     created(){
