@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>1ilsang.blog.me</title>
+</head>
+<body class="container-fluid">
+<div id="app">
+    <ul>
+        <!-- task.done 이 true 일 때 completed CSS 가 실행. -->
+        <li :class="{'completed' : task.done}"
+            :style="styleObject"
+            v-for="task in tasks"
+        >
+            {{task.body}}
+            <!-- task 를 넣어주는 이유는 각각이 컴포넌트가 아닌 전역이기 때문에 인덱스를 주는 것 -->
+            <button
+                    @click="completeTask(task)" class="btn btn-default"
+            >Just do it!
+            </button>
+        </li>
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+new Vue({
+    el: '#app',
+    data: {
+        tasks: [
+            {body: 'Feed the horses', done: true},
+            {body: '1ilsang.blog.me', done: true},
+            {body: 'Jackson Lee', done: false},
+        ],
+        styleObject: {
+            fontSize: '25px'
+        }
+    },
+    methods:{
+        completeTask: function (task) {
+            //들어온 task 의 done 만 변경. 알아서 잡아주는게 신기.
+            task.done = !task.done;
+        }
+    }
+});
+</script>
+<style type="text/css">
+    .completed{
+        text-decoration: line-through;
+    }
+</style>
+</html>
