@@ -9,8 +9,7 @@ https://github.com/hootlex/the-majesty-of-vuejs-2
 
 ![책logo](http://postfiles8.naver.net/MjAxODA0MDNfNzgg/MDAxNTIyNzM4MjMyNDM1.O-ZXp_EFeqw6rxNt0YfbfMuTOOaLaBlRblk4ybocLW8g.unJNjcSBA4r4N-_MBa7zgtzNR8dcUUmpeMKL1gf7YZYg.PNG.1ilsang/image_6985367931522738061585.png?type=w966)
 
-[조금 더 제 개인적인 책 소감을 보고 싶으시다면 여기를 눌러주세요](
-)
+[조금 더 제 개인적인 책 소감을 보고 싶으시다면 여기를 눌러주세요](http://1ilsang.blog.me/221244011114)
 <br/>
 =====================================
 1. Basic
