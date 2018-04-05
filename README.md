@@ -11,7 +11,8 @@ https://github.com/hootlex/the-majesty-of-vuejs-2
 
 [조금 더 제 개인적인 책 소감을 보고 싶으시다면 여기를 눌러주세요](
 )
-
+<br/>
+=====================================
 1. Basic
     1. [Model, if, show, el, data](Basic/1_ifshowModel.html)
     2. [For..in (value, key, index), {{$}}](Basic/2_for.html)
